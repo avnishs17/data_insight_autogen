@@ -1,0 +1,10 @@
+import pandas as pd
+
+# Load the dataset
+df = pd.read_csv('data.csv')
+
+# Print column names to identify the correct species column
+print("Columns in the DataFrame:", df.columns)
+
+# Based on the output, I will then use the correct column name in the next step.
+# For now, I'm just inspecting the columns to debug.

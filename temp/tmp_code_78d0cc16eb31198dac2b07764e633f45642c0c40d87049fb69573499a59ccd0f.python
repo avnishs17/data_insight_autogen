@@ -1,0 +1,38 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the dataset (assuming 'data.csv' is still in the directory)
+df = pd.read_csv('data.csv')
+
+# Identify the species column
+species_column = None
+for col in ['species', 'class', 'variety']:
+    if col in df.columns:
+        species_column = col
+        break
+
+if species_column:
+    print(f"Generating box plots for each numerical feature grouped by '{species_column}'...")
+
+    # Set up the matplotlib figure and axes for subplots
+    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+    axes = axes.flatten() # Flatten the 2x2 array of axes for easy iteration
+
+    numerical_cols = ['sepal.length', 'sepal.width', 'petal.length', 'petal.width']
+
+    for i, col in enumerate(numerical_cols):
+        sns.boxplot(x=species_column, y=col, data=df, ax=axes[i])
+        axes[i].set_title(f'Box Plot of {col} by {species_column}')
+        axes[i].set_xlabel(species_column)
+        axes[i].set_ylabel(col)
+
+    plt.tight_layout()
+    plt.savefig('output.png')
+    print("\nBox plots saved to 'output.png'.")
+    print("These plots visually represent the distribution (median, quartiles, outliers) of each measurement for every Iris variety.")
+else:
+    print("\nError: Could not find a 'species', 'class', or 'variety' column to group by for visualization.")
+    print("Please ensure the dataset contains a column identifying the Iris species.")
+

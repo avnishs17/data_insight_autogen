@@ -1,0 +1,36 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load and explore the dataset
+df = pd.read_csv('data.csv')
+
+print("Dataset Shape:", df.shape)
+print("\nColumn Names:", df.columns.tolist())
+print("\nData Types:")
+print(df.dtypes)
+print("\nFirst 5 rows:")
+print(df.head())
+print("\nBasic Info:")
+print(df.info())
+print("\nSummary Statistics:")
+print(df.describe())
+
+# Check for the presence of a 'species' or similar column for grouping
+# Based on common Iris datasets, it's usually 'species' or 'class'
+species_column = None
+for col in ['species', 'class', 'variety']:
+    if col in df.columns:
+        species_column = col
+        break
+
+if species_column:
+    print(f"\nSummary Statistics for each {species_column}:\n")
+    # Group by the identified species column and describe numerical columns
+    summary_stats_by_species = df.groupby(species_column).describe()
+    print(summary_stats_by_species)
+else:
+    print("\nError: Could not find a 'species', 'class', or 'variety' column to group by.")
+    print("Please ensure the dataset contains a column identifying the Iris species.")
+

@@ -1,0 +1,11 @@
+import pandas as pd
+
+# Load the dataset
+df = pd.read_csv('iris.csv')
+
+# Group by 'species' and calculate descriptive statistics for numerical columns
+summary_statistics = df.groupby('species').describe()
+
+# Print the summary statistics
+print("Summary Statistics for each Iris species:")
+print(summary_statistics)
