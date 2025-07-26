@@ -9,7 +9,7 @@ from autogen_agentchat.messages import TextMessage
 from autogen_agentchat.base import TaskResult
 
 
-st.title('Analyser GPT- Digital Data Analyzer') 
+st.title('Data insight agent') 
 
 uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 
